@@ -6,3 +6,6 @@ config :ubi_nadeo_api, UbiNadeoApi.Endpoint,
 config :ubi_nadeo_api, UbiNadeoApi.Service.UbisoftApi,
   email: System.get_env("EMAIL"),
   password: System.get_env("PASSWORD")
+
+config :ubi_nadeo_api, :latest_dedicated_url,
+  url: "http://files.v04.maniaplanet.com/server/TrackmaniaServer_Latest.zip"
