@@ -4,9 +4,10 @@ defmodule UbiNadeoApi.Router do
   plug(:match)
   plug(:dispatch)
 
-  @resources ["users"]
+  @resources ["users", "servers"]
   @resources_modules %{
-    "users" => UbiNadeoApi.Resources.Users
+    "users" => UbiNadeoApi.Resources.Users,
+    "servers" => UbiNadeoApi.Resources.Servers,
   }
 
   get "/ping", do:
