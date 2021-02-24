@@ -23,3 +23,5 @@ erl_crash.dump
 ubi_nadeo_api-*.tar
 .env
 .tool-versions
+config/*.exs
+rel/
