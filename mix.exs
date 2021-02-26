@@ -56,7 +56,7 @@ defmodule UbiNadeoApi.MixProject do
   defp docs do
     [
       main: "readme", # The main page in the docs
-      logo: "ftc.svg",
+      logo: "logo.png",
       extra_section: "RESOURCES",
       assets: "guides/assets",
       formatters: ["html"],
