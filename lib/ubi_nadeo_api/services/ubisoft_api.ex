@@ -1,17 +1,13 @@
 defmodule UbiNadeoApi.Service.UbisoftApi do
-  alias __MODULE__
+  alias UbiNadeoApi.Type.Token
+  alias UbiNadeoApi.Service.OutboundRequest
 
   @ubi_ticket_endpoint "https://public-ubiservices.ubi.com/v3/profiles/sessions"
   @ubi_api_id "86263886-327a-4328-ac69-527f0d20a237"
 
   def get_new_ticket() do
-    body =
-      @ubi_ticket_endpoint
-      |> HTTPoison.post("", get_headers())
-      |> elem(1)
-      |> Map.get(:body)
-      |> Jason.decode!
-    UbiNadeoApi.Type.Token.new(Map.get(body, "ticket"), Map.get(body, "expiration"))
+    {:ok, data} = OutboundRequest.post(@ubi_ticket_endpoint, get_headers())
+    Token.new(Map.get(data, "ticket"), Map.get(data, "expiration"))
   end
 
   defp get_headers() do

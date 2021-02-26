@@ -1,8 +1,8 @@
 defmodule UbiNadeoApi.Resources.Users do
   alias UbiNadeoApi.Service.NadeoApi
+  alias UbiNadeoApi.Type.Query
 
-  def process([uuid, method])
-  when method == "username" do
+  def process(%Query{path: [uuid, "username"]}) do
     case is_uuid_valid?(uuid) do
       false -> {:error, "Invalid UUID"}
       true -> NadeoApi.get_users_info(uuid)

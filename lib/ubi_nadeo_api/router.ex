@@ -1,13 +1,14 @@
 defmodule UbiNadeoApi.Router do
   use Plug.Router
+  alias UbiNadeoApi.Type.Query
 
   plug(:match)
   plug(:dispatch)
 
-  @resources ["users", "servers"]
+  @resources [:users, :servers]
   @resources_modules %{
-    "users" => UbiNadeoApi.Resources.Users,
-    "servers" => UbiNadeoApi.Resources.Servers,
+    :users => UbiNadeoApi.Resources.Users,
+    :servers => UbiNadeoApi.Resources.Servers,
   }
 
   get "/ping", do:
@@ -15,20 +16,18 @@ defmodule UbiNadeoApi.Router do
 
 
   get _ do
-    [resource | query] =
-      conn.request_path
-      |> String.trim("/")
-      |> String.split("/")
-
-    case resource do
-      resource when resource in @resources ->
-        case apply(Map.get(@resources_modules, resource), :process, [query]) do
-          {:error, :not_found} -> return_not_found(conn)
-          {status, response} -> return_response(conn, {status, response})
-        end
-      _ ->
-        return_not_found(conn)
+    query = Query.from_conn(conn)
+    case dispatch(query) do
+      {:error, :not_found} -> return_not_found(conn)
+      {status, response} -> return_response(conn, {status, response})
     end
+  end
+
+  defp dispatch(%Query{resource: resource})
+  when resource not in @resources, do:
+    {:error, :not_found}
+  defp dispatch(%Query{resource: resource} = query) do
+    apply(Map.get(@resources_modules, resource), :process, [query]) |> IO.inspect
   end
 
 
