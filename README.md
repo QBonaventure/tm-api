@@ -1,21 +1,8 @@
 # UbiNadeoApi
 
-**TODO: Add description**
+Facade API providing data for the Ubisof/Nadeo game Trackmania
 
-## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ubi_nadeo_api` to your list of dependencies in `mix.exs`:
+Documentation: https://hexdocs.pm/ubi_nadeo_api/readme.html
 
-```elixir
-def deps do
-  [
-    {:ubi_nadeo_api, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ubi_nadeo_api](https://hexdocs.pm/ubi_nadeo_api).
-
+An application is running at https://tm-api.fearthec.io/
