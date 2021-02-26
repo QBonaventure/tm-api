@@ -62,6 +62,7 @@ defmodule UbiNadeoApi.MixProject do
       formatters: ["html"],
       extras: extras(),
       groups_for_modules: groups_for_modules(),
+      groups_for_extras: groups_for_extras(),
     ]
   end
 
@@ -73,7 +74,7 @@ defmodule UbiNadeoApi.MixProject do
     ]
   end
 
-  defp groups_for_extras do
+  defp groups_for_extras() do
     [
       "Web resources": Path.wildcard("guides/resources/*.md"),
     ]
