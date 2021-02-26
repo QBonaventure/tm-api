@@ -5,14 +5,8 @@ defmodule UbiNadeoApi.Application do
   def start(_type, _args) do
     children = [
       UbiNadeoApi.Endpoint,
-      %{
-        id: UbiNadeoApi.Service.UbisoftApi,
-        start: {UbiNadeoApi.Service.UbisoftApi, :start_link, []},
-      },
-      %{
-        id: UbiNadeoApi.Service.NadeoApi,
-        start: {UbiNadeoApi.Service.NadeoApi, :start_link, []},
-      },
+      UbiNadeoApi.TokenStore,
+      UbiNadeoApi.Scheduler,
     ]
 
     opts = [strategy: :one_for_one, name: UbiNadeoApi.Supervisor]

@@ -27,7 +27,6 @@ defmodule UbiNadeoApi.MixProject do
       {:joken, "~> 2.3"},
       {:plug, "~> 1.11.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:poison, "~> 4.0"},
       {:quantum, "~> 3.0"},
       {:timex, "~> 3.6.3"},
       {:uuid, "~> 1.1"},

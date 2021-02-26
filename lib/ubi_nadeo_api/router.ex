@@ -11,7 +11,7 @@ defmodule UbiNadeoApi.Router do
   }
 
   get "/ping", do:
-    return_response(conn, {:ok, ping})
+    return_response(conn, {:ok, ping()})
 
 
   get _ do

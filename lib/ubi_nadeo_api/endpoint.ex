@@ -7,7 +7,7 @@ defmodule UbiNadeoApi.Endpoint do
   plug(Plug.Parsers,
     parsers: [:json],
     pass: ["application/json"],
-    json_decoder: Poison
+    json_decoder: Jason
   )
 
   plug(:dispatch)
