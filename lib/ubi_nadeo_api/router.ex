@@ -27,7 +27,7 @@ defmodule UbiNadeoApi.Router do
   when resource not in @resources, do:
     {:error, :not_found}
   defp dispatch(%Query{resource: resource} = query) do
-    apply(Map.get(@resources_modules, resource), :process, [query]) |> IO.inspect
+    apply(Map.get(@resources_modules, resource), :process, [query])
   end
 
 
