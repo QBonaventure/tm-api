@@ -9,7 +9,6 @@ defmodule UbiNadeoApi.Type.Token do
     access_token: nil,
     # refresh_token: nil,
     expiration_time: nil,
-
   ]
 
 
@@ -34,14 +33,13 @@ defmodule UbiNadeoApi.Type.Token do
     }
   end
 
-  defp define_token_type(token) do
-    [header, payload, signature] = String.split(token, ".")
-    header
-    |> Base.decode64!
-    |> Jason.decode!
-    |> Map.get("typ")
-
-  end
+  # defp define_token_type(token) do
+  #   [header, _payload, signature] = String.split(token, ".")
+  #   header
+  #   |> Base.decode64!
+  #   |> Jason.decode!
+  #   |> Map.get("typ")
+  # end
 
 
 end

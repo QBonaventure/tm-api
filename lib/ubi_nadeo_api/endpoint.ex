@@ -23,7 +23,7 @@ defmodule UbiNadeoApi.Endpoint do
   end
 
   def start_link(_opts) do
-    with {:ok, [port: port] = config} <- Application.fetch_env(:ubi_nadeo_api, __MODULE__) do
+    with {:ok, [port: port]} <- Application.fetch_env(:ubi_nadeo_api, __MODULE__) do
       Logger.info("Starting server at http://localhost:#{port}/")
       Plug.Cowboy.http(__MODULE__, [], [port: port])
     end

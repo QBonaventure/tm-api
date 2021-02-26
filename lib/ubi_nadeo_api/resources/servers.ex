@@ -5,6 +5,7 @@ defmodule UbiNadeoApi.Resources.Servers do
     UbiNadeoApi.Service.DedicatedServers.get_latest_version_info()
   end
 
-  def process(_), do: {:error, :not_found}
+  def process(_), do:
+    {:error, :not_found}
 
 end
