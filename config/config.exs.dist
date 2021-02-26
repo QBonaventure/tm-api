@@ -1,7 +1,9 @@
 use Mix.Config
 
 config :ubi_nadeo_api, UbiNadeoApi.Endpoint,
-  port: 4010
+  port: 4000
+
+config :logger, level: :debug
 
 config :ubi_nadeo_api, UbiNadeoApi.Service.UbisoftApi,
   email: System.get_env("EMAIL"),
@@ -9,3 +11,8 @@ config :ubi_nadeo_api, UbiNadeoApi.Service.UbisoftApi,
 
 config :ubi_nadeo_api, :latest_dedicated_url,
   url: "http://files.v04.maniaplanet.com/server/TrackmaniaServer_Latest.zip"
+
+config :ubi_nadeo_api, UbiNadeoApi.Scheduler,
+  jobs: [
+    {"*/30 * * * *", {UbiNadeoApi.TokenStore, :check_tokens, [30]}}
+  ]
