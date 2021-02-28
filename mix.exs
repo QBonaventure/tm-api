@@ -84,8 +84,8 @@ defmodule UbiNadeoApi.MixProject do
     [
       "Resources": [
         UbiNadeoApi.Router,
-        UbiNadeApi.Resources.Users,
-        UbiNadeApi.Resources.Servers
+        UbiNadeoApi.Resources.Users,
+        UbiNadeoApi.Resources.Servers
       ],
       "Services": [
         UbiNadeoApi.Service.UbisoftApi,
@@ -95,13 +95,13 @@ defmodule UbiNadeoApi.MixProject do
         UbiNadeoApi.Type.Token,
       ],
       "Utilities": [
-        UbiNadeApi.TokenStore,
-        UbiNadeApi.Helper,
+        UbiNadeoApi.TokenStore,
+        UbiNadeoApi.Helper,
       ],
       "Others": [
         UbiNadeoApi.Endpoint,
         UbiNadeoApi.Application,
-        UbiNadeApi.Scheduler,
+        UbiNadeoApi.Scheduler,
       ]
     ]
   end
