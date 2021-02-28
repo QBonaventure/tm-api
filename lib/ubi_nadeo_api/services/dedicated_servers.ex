@@ -3,17 +3,44 @@ defmodule UbiNadeoApi.Service.DedicatedServers do
 
   @dedicated_server_origin "http://files.v04.maniaplanet.com"
   @lastest_server_url @dedicated_server_origin <> "/server/TrackmaniaServer_Latest.zip"
-  @title_version_format "%Y%m%d%H%M"
+  @title_version_format "%Y%m%d"
+  @url_version_format "%Y-%m-%d"
 
-  def get_latest_version_info() do
+  def check_new_release() do
     case OutboundRequest.head(@lastest_server_url) do
       {:ok, %{"Last-Modified" => last_modified}} ->
-        last_modified = Timex.parse!(last_modified, "{RFC1123}") |> last_modified_map()
-        {:ok, last_modified}
+        last_modified = Timex.parse!(last_modified, "{RFC1123}")
+         version = to_version(last_modified)
+          case UbiNadeoApi.Type.DedicatedServer.version_exist?(version) do
+            true ->
+              {:ok, :no_change}
+            false ->
+              get_new_version(version, last_modified)
+              |> UbiNadeoApi.Type.DedicatedServer.save()
+              {:ok, :new_version}
+          end
       error -> error
     end
   end
 
+  defp to_version(datetime) do
+    datetime
+    |> Timex.format!(@title_version_format, :strftime)
+    |> String.to_integer()
+  end
+
+  defp get_download_link(datetime) do
+    datetime = Timex.format!(datetime, @url_version_format, :strftime)
+    @dedicated_server_origin <> "/server/TrackmaniaServer_#{datetime}.zip"
+  end
+
+  defp get_new_version(version, last_modified) do
+    UbiNadeoApi.Type.DedicatedServer.new(
+      version,
+      last_modified,
+      get_download_link(last_modified)
+    )
+  end
 
   defp last_modified_map(%DateTime{} = datetime), do:
     %{
