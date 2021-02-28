@@ -14,6 +14,6 @@ config :ubi_nadeo_api, :latest_dedicated_url,
 
 config :ubi_nadeo_api, UbiNadeoApi.Scheduler,
   jobs: [
-    {"*/30 * * * *", {UbiNadeoApi.TokenStore, :check_tokens, [30]}}
+    {"*/10 * * * *", {UbiNadeoApi.TokenStore, :check_tokens, [10]}},
     {"0 */1 * * *", {UbiNadeoApi.Service.DedicatedServers, :check_new_release, []}}
   ]
