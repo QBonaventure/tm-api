@@ -15,7 +15,7 @@ defmodule UbiNadeoApi.Service.NadeoApi do
 
 
   def get_users_info(user_uuid) do
-    case OutboundRequest.get(@display_names<>user_uuid, get_headers()) do
+    case OutboundRequest.get(@display_names<>user_uuid, get_headers("NadeoServices")) do
       {:ok, []} ->
         {:error, "UUID not found"}
       {:ok, [%{"displayName" => display_name}]} ->
