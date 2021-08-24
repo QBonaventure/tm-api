@@ -4,6 +4,7 @@ defmodule UbiNadeoApi.Service.NadeoApi do
 
 
   @tm_prod_origin "https://prod.trackmania.core.nadeo.online"
+  @tm_live_origin "https://live-services.trackmania.nadeo.live"
 
   @auth_endpoint @tm_prod_origin<>"/v2/authentication/token/ubiservices"
   # @auth_refresh @tm_prod_origin<>"/v2/authentication/token/refresh"
@@ -49,11 +50,10 @@ defmodule UbiNadeoApi.Service.NadeoApi do
       {:"Authorization", "ubi_v1 t="<>ubi_ticket},
       {:"Content-Type", "application/json"}
     ]
-  defp get_headers(), do:
+  defp get_headers(token_type), do:
     [
-      {:"Authorization", "nadeo_v1 t="<>UbiNadeoApi.TokenStore.get_token("NadeoServices")},
+      {:"Authorization", "nadeo_v1 t="<>UbiNadeoApi.TokenStore.get_token(token_type)},
       {:"Accept", "application/json"},
       {:"Content-Type", "application/json"}
     ]
-
 end
