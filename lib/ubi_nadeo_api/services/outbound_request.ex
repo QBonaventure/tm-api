@@ -12,7 +12,7 @@ defmodule UbiNadeoApi.Service.OutboundRequest do
     |> parse()
   end
 
-  def post(url, headers, body \\ "") do
+  def post(url, headers, body \\ %{}) do
     {:ok, body} = Jason.encode(body)
     HTTPoison.post(url, body, headers)
     |> parse()
