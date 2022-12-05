@@ -12,6 +12,10 @@ defmodule UbiNadeoApi.Resources.Servers do
       |> elem(1)
       |> Enum.sort_by(& &1.version, &>=/2)
       |> Enum.map(&Map.from_struct(&1))
+    latest_version =
+      List.first(list)
+      |> Map.put(:download_link, UbiNadeoApi.Service.DedicatedServers.latest_version_link())
+    list = List.replace_at(list, 0, latest_version)
     {:ok, list}
   end
 

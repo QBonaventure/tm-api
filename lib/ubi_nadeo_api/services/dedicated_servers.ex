@@ -6,6 +6,8 @@ defmodule UbiNadeoApi.Service.DedicatedServers do
   @title_version_format "%Y%m%d"
   @url_version_format "%Y-%m-%d"
 
+  def latest_version_link(), do: @lastest_server_url
+
   def check_new_release() do
     case OutboundRequest.head(@lastest_server_url) do
       {:ok, %{"Last-Modified" => last_modified}} ->
