@@ -50,6 +50,7 @@ defmodule UbiNadeoApi.MixProject do
       {:quantum, "~> 3.0"},
       {:timex, "~> 3.6.3"},
       {:uuid, "~> 1.1"},
+      {:oauth2, "~> 2.0"},
     ]
   end
 

@@ -24,6 +24,9 @@ defmodule UbiNadeoApi.Type.Token do
       expiration_time: DateTime.from_iso8601(expiration_time) |> elem(1),
     }
   end
+  def new(%OAuth2.AccessToken{access_token: token, expires_at: exp_time}) do
+    %Token{access_token: token, expiration_time: DateTime.from_unix!(exp_time)}
+  end
   def new(access_token) do
     %JOSE.JWT{fields: %{"exp" => exp}} = JOSE.JWT.peek_payload(access_token)
     %Token{

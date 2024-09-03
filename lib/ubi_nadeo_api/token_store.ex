@@ -4,7 +4,7 @@ defmodule UbiNadeoApi.TokenStore do
   alias UbiNadeoApi.Type.Token
   require Logger
 
-  @token_types ["UbiTicket", "NadeoServices", "NadeoClubServices", "NadeoLiveServices"]
+  @token_types ["AppOauth", "UbiTicket", "NadeoServices", "NadeoClubServices", "NadeoLiveServices"]
 
 
   def check_tokens(interval) do
@@ -30,7 +30,8 @@ defmodule UbiNadeoApi.TokenStore do
 
   def get_token(token_type) when token_type in @token_types do
     case Agent.get(__MODULE__, &Map.get(&1, String.to_atom(token_type))) do
-      %Token{access_token: token} -> token
+      %Token{access_token: token} ->
+        token
       nil ->
         %Token{access_token: token} = query_new_token(token_type)
         token
@@ -43,6 +44,11 @@ defmodule UbiNadeoApi.TokenStore do
   end
 
 
+  defp query_new_token("AppOauth" = token_type) do
+    token = UbiNadeoApi.Service.Trackmania.get_new_token()
+    {:ok, token} = put_token(token_type, token)
+    token
+  end
   defp query_new_token("UbiTicket" = token_type) do
     token = UbisoftApi.get_new_ticket()
     {:ok, token} = put_token(token_type, token)
