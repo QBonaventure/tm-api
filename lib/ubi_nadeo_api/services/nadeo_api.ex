@@ -21,8 +21,8 @@ defmodule UbiNadeoApi.Service.NadeoApi do
       {:ok, %{^user_uuid => display_name}} ->
         {:ok, %{
           uuid: user_uuid,
-          username: display_name
-          # login: UbiNadeoApi.Helper.user_uuid_to_login(user_uuid)
+          username: display_name,
+          login: UbiNadeoApi.Helper.user_uuid_to_login(user_uuid)
         }}
     end
   end
